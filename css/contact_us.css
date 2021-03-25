@@ -1,0 +1,94 @@
+
+ @keyframes slide-top{0%{transform:translateY(0)}100%{transform:translateY(-35px)}}
+
+body{
+    height: auto;
+    min-height: 100%;
+}
+.contact-cards{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    align-items: center;
+    
+}
+.contact-card{
+    /* cursor: pointer; */
+    padding: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 15%;
+    margin: 10px;
+    padding: 20px;
+    min-height: 130px;
+    /* background-color: #f7f7f7;  */
+    background: #FCFCFC;
+/* shadow */
+    box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.288);
+    border-radius: 10px; 
+}
+.contact{
+    overflow-wrap: anywhere;
+    color: black;
+}
+.contact-title{
+    color: black;
+}
+.contact_icon{
+    width: 30;
+    
+}
+
+.contact-card:hover .contact_icon{
+        padding: 8px;
+        border: blue solid 2px;
+        border-radius: 51%;
+    
+}
+.contact-card:hover{
+    animation:slide-top .5s cubic-bezier(.25,.46,.45,.94) both
+}
+
+.contact-page-img-div{
+    display: flex;
+    justify-content: center;
+}
+.contact-page-img{
+    width: 60%;
+}
+
+.contact-link{
+    text-decoration: none;
+    font-weight: 600;
+    color: #433af6;
+}
+.contact-header-text{
+    font-style: normal;
+font-weight: normal;
+font-size: 48px;
+line-height: 159.7%;
+/* or 77px */
+
+text-align: center;
+letter-spacing: -0.02em;
+
+color: #000000;
+margin: 30;
+}
+
+@media only screen and (max-width: 750px){
+    .contact-cards{
+        flex-direction: column;
+        
+    }
+    .contact-card{
+        width: 80%;
+    }
+    .contact-header-text{
+    font-size: 35px;
+
+    }
+}
