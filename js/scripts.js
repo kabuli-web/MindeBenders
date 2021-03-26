@@ -7,10 +7,25 @@
             "password":false,
             "confirm_password":false,
         };
-
-        function display_new_registered_user(user){
+        function display_registration_error(error){
+            
+            $("#register_popup_img_success").css('display','none');
+            $("#register_popup_img_error").css('display','flex');
+            $(".registeration_popup_name").css('display','none');
+            $(".registeration_popup_header").first().text(error);
+            $(".registration_details").css('display','none');
+        }
+        function display_registration_success(){
+            
+            $("#register_popup_img_success").css('display','flex');
+            $("#register_popup_img_error").css('display','none');
+            $(".registeration_popup_name").css('display','flex');
+            $(".registration_details").css('display','flex');
+            
+        }
+        function display_new_registered_user(user,message){
             var id=user['student_id'];
-            var name = user['name'];
+            var name = user['first_name'] + ' '+ user['last_name'];
             var gpa=user['gpa'];
             var email = user['email'];
             var number = user['contact_number'];
@@ -26,25 +41,32 @@
             $('#registeration_day').text(day);
             $('#registeration_time').text(time);
             $('#registration_pop_up').trigger('Display');
+            if(String(message) == 'user added'){
+                display_registration_success();
+            }else{
+                display_registration_error(message);
+            }
         }
         function Register_member(user){
-            var form_data = new FormData();
+            var str =  window.location.href;
+            var lastIndex = str.lastIndexOf("/");
+            var path = str.substring(0, lastIndex);
+            var new_path = path + "/mindbenders-ajax.php";
 
-            // var user = {
-            //     username: $("input[name='username']").val(),
-            //     pass: $("input[name='password']").val(),
-            //     student_id: 20457952
-            // }
+            var form_data = new FormData();
             form_data.append('new_user', JSON.stringify(user))
             $.ajax({
-                url: 'http://localhost/uni_project_v2/mindbenders-ajax.php' ,
+                url: new_path,
                 type: 'post',
                 data: form_data,
                 contentType:false,
                 processData:false,
                 success: function(res){
-                    display_new_registered_user(user);
-                    console.log(res);
+                    var response = JSON.parse(res);
+                    display_new_registered_user(user,response.message);
+                    console.log(String(response.message) === 'user added');
+                    console.log(response.message);
+
                 },
                 error: function (err){
                     console.log(err);
@@ -52,6 +74,7 @@
             });
             // $("body").scrollTop($("#" + id));
         }
+        
         function submit_form(){
             if(validate_form()){
                 var user = {
@@ -243,7 +266,8 @@
             validate_form();
         }
         window.onload = function() {
-
+           
+            
         $("#register-form-button").on("click",(e)=>{
             e.preventDefault();
             submit_form();

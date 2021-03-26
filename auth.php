@@ -30,12 +30,11 @@ class Authentication{
             $user['day'],
             $user['time']
         );
-            
-            if($this->user_exists($user['student_id'])){
-                
+            $user_exists = $this->user_exists($user['student_id']);
+            if($user_exists['status']===true){
                 return array(
                     'status'=> false,
-                    'error'=> $this->error + ' USER ALREADY EXISTS '
+                    'error'=> $this->error + ' USER ALREADY EXISTS WITH STUDENT ID: '+ $user['student_id']
                 );
             }else{
                 if($stmt->execute()){
@@ -49,27 +48,71 @@ class Authentication{
                     $stmt->close();
                     return array(
                         'status'=> false,
-                        'error'=> $this->error
+                        'error'=> 'Internal Server Error /execute/'
                     );
                 }
             }
         }else{
             return array(
                 'status'=> false,
-                'error'=> 'error perparing data to insert'
+                'error'=> 'Internal Server Error /prepare/'
             );
             }
         }
     public function user_exists($id){
             $sql = "SELECT * FROM `_20457952_muhammad` WHERE student_id = {$id}";
-            $user = $this->dbConnection->query($sql);
-            if(empty($user)){
-                return false;
+            $result = $this->dbConnection->query($sql);
+            if(empty($result)){
+                return array(
+                    "status"=> false,
+                    'error'=> 'user doesnt exist',
+                    'user'=> null
+                );
             }else{
-                return true;}
+                $user = $result->fetch_assoc();
+                return array(
+                    "status"=> true,
+                    'error'=> 'user already exist',
+                    'user'=> $user
+                );
             }
-        
-
+    }
+    public function login_user($user){
+        $exist = $this->user_exists($user['student_id']);
+        if($exist['status'] === true){
+            if($user['password'] == $exist['user']['password']){
+                $_SESSION['user'] = $exist['user'];
+                return array(
+                    'status'=> true,
+                );
+            }
+            else{
+                return array(
+                    'status'=> false,
+                    'error'=> 'wrong password'
+                );
+            }
+        }else{
+            return array(
+                'status'=> false,
+                'error'=> 'user doesnt exist'
+            );
+        }
+    }  
+    public function logout_user(){
+        if(isset($_SESSION['user'])){
+            unset($_SESSION['user']);
+            return array(
+                'status'=> true,
+            );
+        }else{
+            return array(
+                'status'=> false,
+                'error'=> 'user is not loged in'
+            );
+        }
+    }
     
 }
+    
 ?>

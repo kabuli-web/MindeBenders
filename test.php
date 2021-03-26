@@ -33,11 +33,11 @@
                 e.preventDefault();
                 var form_data = new FormData();
                 var data = {
-                    username: $("input[name='username']").val(),
-                    pass: $("input[name='password']").val(),
-                    student_id: 20457952
+                    student_id: $("input[name='username']").val(),
+                    password: $("input[name='password']").val(),
+                    
                 }
-                form_data.append('new_user', JSON.stringify(data))
+                form_data.append('login_user', JSON.stringify(data))
                 $.ajax({
                     url: 'http://localhost/uni_project_v2/mindbenders-ajax.php' ,
                     type: 'post',

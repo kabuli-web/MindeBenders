@@ -27,9 +27,11 @@
 <div class="pop_up" id="registration_pop_up">
         <div class="popup_close_div">
             <img class="close_button" id="popup_close_button" src="./assets/remove.png" alt="">
+
         </div>
         <div class="content">
-            <img id="register_popup_img" src="./assets/Feedback.png" alt="">
+            <img class="register_popup_img" id="register_popup_img_success" src="./assets/Feedback.png" alt="">
+            <img class="register_popup_img" id="register_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
             <h2 class="registeration_popup_name" id="registeration_name">Ali</h2>
             <h2 class="registeration_popup_header">Thank You For Registering</h2>
             <div class="registration_details">
