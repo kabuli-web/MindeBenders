@@ -55,6 +55,8 @@
         }
     } 
     elseif(isset($_POST['logout_user'])){
+        $auth = new Authentication();
+        $res = new response();
         $result = $auth->logout_user();
         if($result['status']===true){
             $res->message = 'done';
@@ -65,6 +67,29 @@
         }
     }
 
+    elseif(isset($_POST['update_user'])){
+        $res = new response();
+        if(isset($_SESSION['user'])){
+            
+        $db = new db_connection();
+        $db->connect();
+        $dbConnection = $db->dbConnection;
+        $auth = new Authentication($dbConnection);
+        $user = json_decode($_POST['update_user'],true);
+        $user['student_id']=$_SESSION['user']['student_id'];
+        $result = $auth->update_user($user);
+        if($result['status']===false){
+            $res->message = $result['error'];
+        }else{
+            $res->message = 'done';
+        }
+        
+        }else{
+            $res->message = 'user not logged in';
+        }
+        $db->disconnect();
+        echo json_encode($res);
+    }
     
 
 ?>

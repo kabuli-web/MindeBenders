@@ -1,7 +1,7 @@
 <?php
 class Authentication{
     public $dbConnection;
-    function __construct($dbConnection) {
+    function __construct($dbConnection=null) {
         $this->dbConnection = $dbConnection;
       }
     public $error;
@@ -89,7 +89,7 @@ class Authentication{
             else{
                 return array(
                     'status'=> false,
-                    'error'=> 'wrong password'
+                    'error'=> 'wrong Credentials'
                 );
             }
         }else{
@@ -112,6 +112,30 @@ class Authentication{
             );
         }
     }
+    public function update_user($user)
+    {   
+        $sql = "UPDATE `_20457952_muhammad` SET email = '{$user["email"]}', first_name = '{$user["first_name"]}',last_name = '{$user["last_name"]}',gpa={$user["gpa"]}, contact_number = {$user["contact_number"]}, day= '{$user["day"]}',activity= '{$user["activity"]}',time= '{$user["time"]}' WHERE student_id = 20457952";
+            $user_exists = $this->user_exists($user['student_id']);
+            if($user_exists['status']===true){
+                $update_result = $this->dbConnection->query($sql);
+                if($update_result===true){
+                    return array(
+                        'status'=> true,
+                    );
+                }else{
+                    return array(
+                        'status'=> false,
+                        'error'=> 'User not updated'
+                    );
+                }
+            }else{
+                return array(
+                    'status'=> false,
+                    'error'=> ' USER doesnt EXISTS'
+                );
+            }
+        }
+       
     
 }
     

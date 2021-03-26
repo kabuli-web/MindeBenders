@@ -41,6 +41,8 @@
             $('#registeration_day').text(day);
             $('#registeration_time').text(time);
             $('#registration_pop_up').trigger('Display');
+            // $(".pop_up").scrollTo("");
+            $(".pop_up").get(0).scrollIntoView();
             if(String(message) == 'user added'){
                 display_registration_success();
             }else{
@@ -51,12 +53,12 @@
             var str =  window.location.href;
             var lastIndex = str.lastIndexOf("/");
             var path = str.substring(0, lastIndex);
-            var new_path = path + "/mindbenders-ajax.php";
+            var post_path = path + "/mindbenders-ajax.php";
 
             var form_data = new FormData();
             form_data.append('new_user', JSON.stringify(user))
             $.ajax({
-                url: new_path,
+                url: post_path,
                 type: 'post',
                 data: form_data,
                 contentType:false,
@@ -72,7 +74,7 @@
                     console.log(err);
                 }
             });
-            // $("body").scrollTop($("#" + id));
+           
         }
         
         function submit_form(){
@@ -140,7 +142,7 @@
             var element = $("#"+id);
             element.css("border-color","#FF5886");
             element.siblings(".error").text(text).css("display","block");
-                inputs_valid[key]=false;
+            inputs_valid[key]=false;
         }
         function hide_error(id,text,key){
             var element = $("#"+id);
@@ -267,7 +269,7 @@
         }
         window.onload = function() {
            
-            
+        
         $("#register-form-button").on("click",(e)=>{
             e.preventDefault();
             submit_form();

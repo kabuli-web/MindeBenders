@@ -1,6 +1,15 @@
 
- function display_edited_registered_user(user){
-    var id=user['student_id'];
+inputs_valid = {
+    "student_id":true,
+    "first_name":true,
+    "last_name":true,
+    "gpa":true,
+    "email":true,
+    "password":true,
+    "confirm_password":true,
+};
+ function display_edited_registered_user(user,message){
+    
     var name = user['name'];
     var gpa=user['gpa'];
     var email = user['email'];
@@ -11,70 +20,95 @@
     var time =user['time'];
     $('#edit_result_name').text(name);
     $('#edit_result_email').text(email);
-    $('#edit_result_id').text(id);
+  
     $('#edit_result_number').text(number);
     $('#edit_result_gpa').text(gpa);
     $('#edit_result_activity').text(activity);
     $('#edit_result_day').text(day);
     $('#edit_result_time').text(time);
     $('#edit_successful_pop_up').trigger('Display');
-
+    $(".pop_up").get(0).scrollIntoView();
+    if(String(message) == 'done'){
+        display_registration_success();
+    }else{
+        display_registration_error(message);
+    }
 }
-function Register_member(obj){
-    var form_data = new FormData();
-    form_data['new_user'] = 'user 1 ';
-    $.ajax({
-        url: window.location.href,
-        type: 'post',
-        data: form_data,
-        success:(response)=>{
-   
-            console.log(response);
-        
-           },
-           error:(err)=>{
-               console.log(err);
-           }
-    });
+function display_registration_error(error){
+            
+    $("#register_popup_img_success").css('display','none');
+    $("#register_popup_img_error").css('display','flex');
+    $(".registeration_popup_name").css('display','none');
+    $(".registeration_popup_header").first().text(error);
+    $(".registration_details").css('display','none');
+}
+function display_registration_success(){
+    
+    $("#register_popup_img_success").css('display','flex');
+    $("#register_popup_img_error").css('display','none');
+    $(".registeration_popup_name").css('display','flex');
+    $(".registration_details").css('display','flex');
     
 }
-function submit_form(){
+
+function update_user(user){
+    console.log('update triggered')
+    var str =  window.location.href;
+    var lastIndex = str.lastIndexOf("/");
+    var path = str.substring(0, lastIndex);
+    var post_path = path + "/mindbenders-ajax.php";
+
+    var form_data = new FormData();
+    form_data.append('update_user', JSON.stringify(user))
+    $.ajax({
+        url: post_path,
+        type: 'post',
+        data: form_data,
+        contentType:false,
+        processData:false,
+        success: function(res){
+            var response = JSON.parse(res);
+            display_edited_registered_user(user,response.message);
+           
+            console.log(response);
+
+        },
+        error: function (err){
+            console.log(err);
+        }
+    });
+    // $("body").scrollTop($("#" + id));
+}
+
+function update_form(){
+    
     if(validate_form()){
+       
         var user = {
-           "student_id":$("#student-id-input").val(),
-               "first_name":$("#first-name-input").val(),
-               "last_name":$("#last-name-input").val(),
-               "gpa":$("#gpa-input").val(),
-               "email":$("#email-input").val(),
-               "contact":$("#contact-input").val(),
-               "password":$("#password-input").val(),
-               "confirm_password":$("#confirm-password-input").val(),
-               "Type_of_activity":$("input[name='activity']:checked").val(),
-               "day_of_week":$("input[name='day']:checked").val(),
+           
+               "first_name":$("input[name='first_name']").val(),
+               "last_name":$("input[name='last_name']").val(),
+               "gpa":$("input[name='gpa']").val(),
+               "email":$("input[name='email']").val(),
+               "contact_number":$("input[name='contact_number']").val(),
+               "activity":$("input[name='activity']:checked").val(),
+               "day":$("input[name='day']:checked").val(),
                "time":$("input[name='time']:checked").val(),
                
         };
-        // Register_member(member);
-        display_edited_registered_user(user);
-        member = null;
+        console.log(user);
+        update_user(user);
+        
     }
 }
-inputs_valid = {
-    "student_id":false,
-    "first_name":false,
-    "last_name":false,
-    "gpa":false,
-    "email":false,
-    "password":true,
-    "confirm_password":true,
-};
+
 window.onload = function(){
         
-       
-        $("#edit-student-id-input").on("change paste keyup keypress", function() {
-            var id = this.id; 
-            validate_student_id(id);
-         });
+    $("#edit-form-button").on("click",(e)=>{
+        console.log('button triggered')
+        e.preventDefault();
+        update_form();
+    });
         $("#edit-first-name-input").on("change paste keyup", function() {
             var id = this.id; 
            
@@ -100,10 +134,7 @@ window.onload = function(){
         $("#edit_successful_pop_up").css("display","block");
             });
         
-            $("#edit-form-button").on("click",(e)=>{
-                e.preventDefault();
-                submit_form();
-            });
+            
         $("#popup_close_button").on('click',()=>{
 
         $("#edit_successful_pop_up").css("display","none");

@@ -1,5 +1,5 @@
 
- @keyframes slide-top{0%{transform:translateY(0)}100%{transform:translateY(-35px)}}
+@keyframes slide-top{0%{transform:translateY(0)}100%{transform:translateY(-35px)}}
 
 body{
     height: auto;
@@ -9,11 +9,12 @@ body{
     display: flex;
     justify-content: space-between;
     margin: 20;
+    align-items: center;
 }
 .contact-header-text{
     font-style: normal;
 font-weight: normal;
-font-size: 48px;
+font-size: 35px;
 line-height: 159.7%;
 /* or 77px */
 
