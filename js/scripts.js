@@ -13,10 +13,9 @@
             var name = user['name'];
             var gpa=user['gpa'];
             var email = user['email'];
-            var number = user['contact'];
-            
-            var activity =user['Type_of_activity'];
-            var day =user['day_of_week'];
+            var number = user['contact_number'];
+            var activity =user['activity'];
+            var day =user['week'];
             var time =user['time'];
             $('#registeration_name').text(name);
             $('#registeration_email').text(email);
@@ -27,23 +26,29 @@
             $('#registeration_day').text(day);
             $('#registeration_time').text(time);
             $('#registration_pop_up').trigger('Display');
-
         }
-        function Register_member(obj){
+        function Register_member(user){
             var form_data = new FormData();
-            form_data['new_user'] = 'user 1 ';
+
+            // var user = {
+            //     username: $("input[name='username']").val(),
+            //     pass: $("input[name='password']").val(),
+            //     student_id: 20457952
+            // }
+            form_data.append('new_user', JSON.stringify(user))
             $.ajax({
-                url: window.location.href,
+                url: 'http://localhost/uni_project_v2/mindbenders-ajax.php' ,
                 type: 'post',
                 data: form_data,
-                success:(response)=>{
-           
-                    console.log(response);
-                
-                   },
-                   error:(err)=>{
-                       console.log(err);
-                   }
+                contentType:false,
+                processData:false,
+                success: function(res){
+                    display_new_registered_user(user);
+                    console.log(res);
+                },
+                error: function (err){
+                    console.log(err);
+                }
             });
             // $("body").scrollTop($("#" + id));
         }
@@ -55,16 +60,15 @@
                        "last_name":$("#last-name-input").val(),
                        "gpa":$("#gpa-input").val(),
                        "email":$("#email-input").val(),
-                       "contact":$("#contact-input").val(),
+                       "contact_number":$("#contact-input").val(),
                        "password":$("#password-input").val(),
                        "confirm_password":$("#confirm-password-input").val(),
-                       "Type_of_activity":$("input[name='activity']:checked").val(),
-                       "day_of_week":$("input[name='day']:checked").val(),
+                       "activity":$("input[name='activity']:checked").val(),
+                       "day":$("input[name='day']:checked").val(),
                        "time":$("input[name='time']:checked").val(),
                        
                 };
-                // Register_member(member);
-                display_new_registered_user(user);
+                Register_member(user);
                 member = null;
             }
         }

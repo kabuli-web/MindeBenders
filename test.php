@@ -30,9 +30,8 @@
 <script>
    window.onload = function () {
     $("#login").on('click',function (e) {
-        var form_data = new FormData();
-        
-        e.preventDefault();
+                e.preventDefault();
+                var form_data = new FormData();
                 var data = {
                     username: $("input[name='username']").val(),
                     pass: $("input[name='password']").val(),
@@ -46,8 +45,8 @@
                     contentType:false,
                     processData:false,
                     success: function(res){
-                    
-                        console.log(res);
+                        var response = JSON.parse(res);
+                        console.log(response.message);
                     },
                     error: function (err){
                         console.log(err);
