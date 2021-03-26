@@ -62,7 +62,7 @@ class Authentication{
     public function user_exists($id){
             $sql = "SELECT * FROM `_20457952_muhammad` WHERE student_id = {$id}";
             $result = $this->dbConnection->query($sql);
-            if(empty($result)){
+            if(mysqli_num_rows($result)==0){
                 return array(
                     "status"=> false,
                     'error'=> 'user doesnt exist',
@@ -119,8 +119,10 @@ class Authentication{
             if($user_exists['status']===true){
                 $update_result = $this->dbConnection->query($sql);
                 if($update_result===true){
+                    $user_e = $this->user_exists($user['student_id']);
                     return array(
                         'status'=> true,
+                        'user'=> $user_e['user']
                     );
                 }else{
                     return array(
@@ -132,6 +134,8 @@ class Authentication{
                 return array(
                     'status'=> false,
                     'error'=> ' USER doesnt EXISTS'
+                    
+                    
                 );
             }
         }

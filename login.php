@@ -35,14 +35,15 @@
 
 <!-- Here we include th header -->
 <?php include './views/navbar.php';?>
+<?php include './views/database-test.php';?>
 
 <div class="pop_up" id="login_successful_pop_up">
     <div class="popup_close_div">
         <img class="close_button" id="popup_close_button" src="./assets/remove.png" alt="">
     </div> <div class="content">
-    <img class="register_popup_img" id="register_popup_img_success" src="./assets/Feedback.png" alt="">
-    <img class="register_popup_img" id="register_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
-    <h2 class="registeration_popup_header">Logged in</h2>
+    <img class="register_popup_img" id="login_popup_img_success" style="display: none;" src="./assets/Feedback.png" alt="">
+    <img class="register_popup_img" id="login_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
+    <h2 class="registeration_popup_header" id="login_popup_header" >Logged in</h2>
     </div>
 </div>
 <div class="profile-content">
@@ -84,7 +85,7 @@
    <style>
        #login_successful_pop_up{
            width: 500;
-           height: 300;
+           height: 500;
            
            top: 25vh;
        }
@@ -102,22 +103,21 @@
 
         $("#login_successful_pop_up").css("display","none");
         });
-        function display_registration_error(error){
+        function display_login_error(error){
             $("#login_successful_pop_up").css('display','flex');
             
-            $("#register_popup_img_success").css('display','none');
-            $("#register_popup_img_error").css('display','flex');
-            $(".registeration_popup_name").css('display','none');
-            $(".registeration_popup_header").first().text(error);
-            $(".registration_details").css('display','none');
+            $("#login_popup_img_success").css('display','none');
+            $("#login_popup_img_error").css('display','flex');
+           
+            $("#login_popup_header").first().text(error);
+           
         }
-        function display_registration_success(){
+        function display_login_success(){
             $("#login_successful_pop_up").css('display','flex');
             
-            $("#register_popup_img_success").css('display','flex');
-            $("#register_popup_img_error").css('display','none');
-            $(".registeration_popup_name").css('display','flex');
-            $(".registration_details").css('display','flex');
+            $("#login_popup_img_success").css('display','flex');
+            $("#login_popup_img_error").css('display','none');
+           
             
         }
         function login_user(user){
@@ -126,6 +126,8 @@
             var lastIndex = str.lastIndexOf("/");
             var path = str.substring(0, lastIndex);
             var post_path = path + "/mindbenders-ajax.php";
+            var redirect_path = path + "/edit_profile.php";
+
             var form_data = new FormData();
             form_data.append('login_user', JSON.stringify(user))
             $.ajax({
@@ -137,13 +139,15 @@
                 success: function(res){
                     var response = JSON.parse(res);
                     if(response['message'] == 'done'){
-                        display_registration_success();
+                        display_login_success();
+                        setTimeout(function() {
+                        window.location.assign(redirect_path);
+                    }, 1000);
                     }else{
-                        display_registration_error(response['message']);
+                        display_login_error(response['message']);
                     }
                     $(".pop_up").get(0).scrollIntoView();
-                    console.log(String(response['message']));
-                    console.log(response);
+                    
                     
 
                 },
@@ -169,7 +173,7 @@
         
         
         $("#login-form-button").on("click",(e)=>{
-        console.log('button triggered')
+      
         e.preventDefault();
         login_form();
         });

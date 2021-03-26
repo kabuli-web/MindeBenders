@@ -42,7 +42,7 @@
             $('#registeration_time').text(time);
             $('#registration_pop_up').trigger('Display');
             // $(".pop_up").scrollTo("");
-            $(".pop_up").get(0).scrollIntoView();
+            $("#registration_pop_up").get(0).scrollIntoView();
             if(String(message) == 'user added'){
                 display_registration_success();
             }else{
@@ -100,13 +100,16 @@
         function disable_form_button(){
             $("#register-form-button").removeClass("secondary-button");
             $("#register-form-button").addClass("disabled-secondary-button").prop("disabled","true");
-            
+            $("#edit-form-button").removeClass("secondary-button");
+            $("#edit-form-button").addClass("disabled-secondary-button").prop("disabled","true");
             
         }
         function enable_form_button(){
             $("#register-form-button").removeClass("disabled-secondary-button");
             $("#register-form-button").addClass("secondary-button").removeAttr("disabled");
-        
+            $("#edit-form-button").removeClass("disabled-secondary-button");
+            $("#edit-form-button").addClass("secondary-button").removeAttr("disabled");
+            
         }
         function validate_form(callback){
             var valid = true;
@@ -330,9 +333,9 @@
             $("#registration_pop_up").css("display","block");
                 });
     
-        $("#popup_close_button").on('click',()=>{
+        $("#popup_close_button").first().on('click',()=>{
             $("body").css("overflow","auto");
-            $("#registration_pop_up").css("display","none");
+            $(".pop_up").css("display","none");
             
                 });
      }

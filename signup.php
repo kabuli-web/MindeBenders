@@ -24,6 +24,8 @@
 
 <!-- Here we include th header to avoid repititio -->
 <?php include './views/navbar.php';?>
+<?php include './views/database-test.php';?>
+
 <div class="pop_up" id="registration_pop_up">
         <div class="popup_close_div">
             <img class="close_button" id="popup_close_button" src="./assets/remove.png" alt="">

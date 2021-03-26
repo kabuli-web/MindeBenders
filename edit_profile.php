@@ -71,6 +71,8 @@
 
 <!-- Here we include th header -->
 <?php include './views/navbar.php';?>
+<?php include './views/database-test.php';?>
+
 <h3 class="contact-header-text"> Hello <?php echo $_SESSION['user']['first_name']; ?></h3>
 <div class="pop_up" id="edit_successful_pop_up">
     <div class="popup_close_div">

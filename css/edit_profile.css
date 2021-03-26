@@ -9,7 +9,7 @@ body{
     display: flex;
     justify-content: space-between;
     margin: 20;
-    align-items: center;
+    
 }
 .contact-header-text{
     font-style: normal;

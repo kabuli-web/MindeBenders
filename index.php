@@ -21,6 +21,7 @@
 
 <!-- Here we include th header -->
 <?php include './views/navbar.php';?>
+<?php include './views/database-test.php';?>
 
     <div class="banner">
         <img style="width: 380; "src="./assets/testing-new-tech.png" alt="banner image">
@@ -42,13 +43,13 @@
           <div class="cards">
       
       <a href="./signup.php"><div class="card" style="background-color: rgba(252,104,123,89%);">
-                      <img style="width: 230; height: 172;"  src="./assets/build--product.png" alt="card image">
+                      <img style="width: 230; height: 172;"  src="./assets/web-development.png" alt="card image">
                       <h5 class="card-title">programming Competition</h5>
                       <h5 class="card-count">participants:5</h5>
                       
                   </div></a>
                   <a href="./signup.php"><div class="card" style="background-color:rgba(67,58,246,47%) ;">
-                      <img style="width: 230; height: 172;" src="./assets/web-development.png" alt="card image">
+                      <img style="width: 230; height: 172;" src="./assets/chatbot.png" alt="card image">
                       <h5 class="card-title">Professional Certification</h5>
                       <h5 class="card-id">participants:2</h5>
                       

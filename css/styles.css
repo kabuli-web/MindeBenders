@@ -388,7 +388,7 @@ footer{
 }
 .register_popup_img{
     width: 40%;
-    height: 40%;
+   
 }
 .registeration_popup_header{
     font-style: normal;
@@ -455,7 +455,7 @@ input[type=radio]{
 @media only screen and (min-width: 1400px){
     .register_popup_img{
         width: 30%;
-        height: 30%;
+        
     }
 }
 @media only screen and (max-width: 1150px){
@@ -494,7 +494,7 @@ input[type=radio]{
 @media only screen and (max-width: 685px) {
     .register_popup_img{
         width: 60%;
-        height: 60%;
+        
     }
     
     .banner{

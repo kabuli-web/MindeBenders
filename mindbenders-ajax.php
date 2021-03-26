@@ -80,7 +80,8 @@
         $result = $auth->update_user($user);
         if($result['status']===false){
             $res->message = $result['error'];
-        }else{
+        }elseif($result['status']===true){
+            $_SESSION['user']=$result['user'];
             $res->message = 'done';
         }
         
@@ -90,6 +91,22 @@
         $db->disconnect();
         echo json_encode($res);
     }
-    
+    elseif(isset($_POST['test_database'])){
+        $res = new response();
+        $db = new db_connection();
+        $db->connect();
+        if($db->connection_status===true){
+            $res->message = array(
+                "status"=> true,
+                'message' => "Database Connected Successfully. Enjoy"
+            );
+        }else{
+            $res->message = array(
+                "status"=> true,
+                "error"=>  $db->dbConnection->connect_error
+            );
+        }
+        echo json_encode($res);
+    }
 
 ?>

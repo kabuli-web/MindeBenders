@@ -21,8 +21,8 @@
 
 <!-- Here we include th header -->
 <?php include './views/navbar.php';?>
-<h1 class="contact-header-text"> Contact Us</h1>
 
+<h1 class="contact-header-text"> Contact Us</h1>
     <div class="contact-page-img-div">
         <img class="contact-page-img" src="./assets/Feedback 4.png" alt="">
     </div>
