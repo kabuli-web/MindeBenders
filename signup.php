@@ -1,16 +1,25 @@
 <?php
-
-    if(isset($_SESSION))
-    {
-
-    }
-    else
+    if(isset($_SESSION)===false)
     {
         session_start();
+    }    
+    if(isset($_SESSION))
+    {   
+        if(isset($_SESSION['user'])===true){
+            ?>
+            <script>
+            var str =  window.location.href;
+            var lastIndex = str.lastIndexOf("/");
+            var path = str.substring(0, lastIndex);
+            
+            var resirect_path = path + "/index.php";
+
+            window.location.assign(resirect_path);
+        </script>
+            <?php
+        }
     }
-
-   
-
+    
 ?>
 
 <html lang="en">
@@ -32,11 +41,11 @@
 
         </div>
         <div class="content">
-            <img class="register_popup_img" id="register_popup_img_success" src="./assets/Feedback.png" alt="">
-            <img class="register_popup_img" id="register_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
-            <h2 class="registeration_popup_name" id="registeration_name">Ali</h2>
-            <h2 class="registeration_popup_header">Thank You For Registering</h2>
-            <div class="registration_details">
+            <img class="popup_img" id="register_popup_img_success" style="display: none;" src="./assets/Feedback.png" alt="">
+            <img class="popup_img" id="register_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
+            <h2 class="popup_name" id="registeration_name">Ali</h2>
+            <h2 class="popup_header" id="registration_status">Thank You For Registering</h2>
+            <div class="popup_details" >
                 <div class="detail_icon">
                     <img class="icon" src="./assets/email.png" alt="email_icon">
                     <h4 class="detail" id="registeration_email">muhammadsamad2@gmail.com</h4>

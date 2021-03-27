@@ -26,7 +26,7 @@
     <head id="header">
         <?php include './views/global_head_links.php';?>
         <link rel="stylesheet" href="./css/edit_profile.css">
-        <script src="./js/edit_profile.js" ></script>
+        
         <script>
             $(document).ready(function(){
                 $("input[value='<?php echo $_SESSION['user']['activity']; ?>']").attr('checked',true);
@@ -40,27 +40,6 @@
                
 
 
-                // $('input[name = "activity"]').each(function(index){
-                //     if($(this).val()== "<?php echo $_SESSION['user']['activity']; ?>"){
-                //         $(this).attr('checked',true);
-                //         console.log($(this).val())
-                //     }
-                // });
-                // $('input[name = "day"]').each(function(index){
-                //     if($(this).val()== "<?php echo $_SESSION['user']['day']; ?>"){
-                //         $(this).attr('checked',true);
-                //         console.log($(this).val())
-
-                //     }
-                // });
-                // $('input[name = "time"]').each(function(index){
-                //     if($(this).val()== "<?php echo $_SESSION['user']['time']; ?>"){
-                //         $(this).attr('checked',true);
-                //         console.log($(this).val())
-
-                //     }
-                // });
-                
                 
             });
         </script>
@@ -79,11 +58,11 @@
         <img class="close_button" id="popup_close_button" src="./assets/remove.png" alt="">
     </div>
     <div class="content">
-        <img class="register_popup_img" id="register_popup_img_success" src="./assets/Feedback.png" alt="">
-        <img class="register_popup_img" id="register_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
-        <h2 class="registeration_popup_name" id="registeration_name"><?php echo $_SESSION['user']['first_name']; ?></h2>
-        <h2 class="registeration_popup_header">Successfully Edited</h2>
-        <div class="registration_details">
+        <img class="popup_img" id="edit_popup_img_success" style="display: none;" src="./assets/Feedback.png" alt="">
+        <img class="popup_img" id="edit_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
+        <h2 class="popup_name" id="edit_name"><?php echo $_SESSION['user']['first_name']; ?></h2>
+        <h2 class="popup_header" id="edit_result_text">Successfully Edited</h2>
+        <div class="popup_details" id="edit_details_result">
             <div class="detail_icon">
                 <img class="icon" src="./assets/email.png" alt="email_icon">
                 <h4 class="detail" id="registeration_email">muhammadsamad2@gmail.com</h4>

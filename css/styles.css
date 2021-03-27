@@ -386,23 +386,23 @@ footer{
     box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
     border-radius: 89px;
 }
-.register_popup_img{
+.popup_img{
     width: 40%;
    
 }
-.registeration_popup_header{
+.popup_header{
     font-style: normal;
     font-weight: normal;
     font-size: 32px;
     text-align: center;
 }
-.registeration_popup_name{
+.popup_name{
     font-style: normal;
     font-weight: 800;
     font-size: 32px;
     text-align: center;
 }
-.registration_details{
+.popup_details{
     display: flex;
     flex-direction: row;
     width: 80%;
@@ -421,7 +421,7 @@ footer{
     height: 30;
     padding: 5;
 }
-.detail{
+.popup_details{
     text-align: center;
 }
 .cards a{
@@ -453,13 +453,13 @@ input[type=radio]{
 }
 
 @media only screen and (min-width: 1400px){
-    .register_popup_img{
+    .popup_img{
         width: 30%;
         
     }
 }
 @media only screen and (max-width: 1150px){
-    .registration_details{
+    .popup_details{
         flex-direction: column;
     }
     .pop_up{
@@ -492,7 +492,7 @@ input[type=radio]{
 
 }
 @media only screen and (max-width: 685px) {
-    .register_popup_img{
+    .popup_img{
         width: 60%;
         
     }
