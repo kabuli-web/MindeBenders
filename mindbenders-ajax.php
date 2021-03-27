@@ -30,7 +30,7 @@
             if( $user_result['status']=== false){
                 $res->message = $user_result['error'];
             }else{
-                $res->message = 'user added';
+                $res->message = 'done';
             }
         }
         $db->disconnect();
@@ -98,7 +98,7 @@
         if($db->connection_status===true){
             $res->message = array(
                 "status"=> true,
-                'message' => "Database Connected Successfully. Enjoy"
+                'message' => "Database Connected Successfully. Enjoy errors = {$db->errors}" 
             );
         }else{
             $res->message = array(

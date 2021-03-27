@@ -1,13 +1,13 @@
 
 
-<div class="pop_up login" id="database-notice">
+<div class="database_notice_popup" id="database-notice">
     <div class="popup_close_div">
-        <img class="close_button" id="login_popup_close_button" src="./assets/remove.png" alt="">
+        <img class="close_button" id="database_popup_close_button" src="./assets/remove.png" alt="">
     </div> <div class="content">
-    <img class="register_popup_img" id="register_popup_img_success" src="./assets/build--product.png" alt="">
+    <img class="popup_img" id="database_popup_img_success" src="./assets/build--product.png" alt="">
    
-    <h2 class="registeration_popup_header">Please add database details so the website can work properly</h2>
-    <p class='log'>
+    <h2 class="popup_header">Please add database details so the website can work properly</h2>
+    <p id='database_error_log'>
     </p>
     </div>
 </div>
@@ -16,6 +16,24 @@
     padding: 50px;
     
     top: 5vh;
+}
+.database_notice_popup{
+    display: none;
+    width: 75%;
+    /* height: 75%; */
+    position: absolute;
+    top: 50vh;
+    background-color: #F0F2F6;
+    z-index: 100;
+    background: #FCFCFC;
+    /* shadow */ 
+    box-shadow: 0px 0px 8px -2px rgba(0, 0, 0, 0.25);
+    border-radius: 89px;
+}
+@media only screen and (max-width: 1150px){
+    .database_notice_popup{
+        border-radius: 30px;
+    }
 }
 </style>
 <script>
@@ -43,9 +61,10 @@
                 console.log("dbconnected successfully")
                }else{
                 $('#database-notice').css('display',"flex");
-                $('.log').first().text(res);
-                $(".pop_up").get(0).scrollIntoView();
+                $('#database_error_log').text(res);
+                $("#database-notice").get(0).scrollIntoView();
                }
+              
             },
             error: function (err){
                 console.log(err);

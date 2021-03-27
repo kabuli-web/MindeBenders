@@ -36,18 +36,18 @@ inputs_valid = {
 }
 function display_registration_error(error){
             
-    $("#register_popup_img_success").css('display','none');
-    $("#register_popup_img_error").css('display','flex');
-    $(".registeration_popup_name").css('display','none');
-    $(".registeration_popup_header").first().text(error);
-    $(".registration_details").css('display','none');
+    $("#edit_popup_img_success").css('display','none');
+    $("#edit_popup_img_error").css('display','flex');
+    $("#edit_name").css('display','none');
+    $("#edit_result_text").text(error);
+    $("#edit_details_result").css('display','none');
 }
 function display_registration_success(){
     
-    $("#register_popup_img_success").css('display','flex');
-    $("#register_popup_img_error").css('display','none');
-    $(".registeration_popup_name").css('display','flex');
-    $(".registration_details").css('display','flex');
+    $("#edit_popup_img_success").css('display','flex');
+    $("#edit_popup_img_error").css('display','none');
+    $("#edit_name").css('display','flex');
+    $("#edit_details_result").css('display','flex');
     
 }
 

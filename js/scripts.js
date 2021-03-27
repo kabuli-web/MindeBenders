@@ -11,16 +11,17 @@
             
             $("#register_popup_img_success").css('display','none');
             $("#register_popup_img_error").css('display','flex');
-            $(".registeration_popup_name").css('display','none');
-            $(".registeration_popup_header").first().text(error);
-            $(".registration_details").css('display','none');
+            $("#registeration_name").css('display','none');
+            $("#registration_status").text(error);
+            $(".popup_details").css('display','none');
         }
         function display_registration_success(){
             
             $("#register_popup_img_success").css('display','flex');
             $("#register_popup_img_error").css('display','none');
-            $(".registeration_popup_name").css('display','flex');
-            $(".registration_details").css('display','flex');
+            $("#registration_status").text('thank you for registering');
+            $("#registeration_name").css('display','flex');
+            $(".popup_details").css('display','flex');
             
         }
         function display_new_registered_user(user,message){
@@ -43,7 +44,7 @@
             $('#registration_pop_up').trigger('Display');
             // $(".pop_up").scrollTo("");
             $("#registration_pop_up").get(0).scrollIntoView();
-            if(String(message) == 'user added'){
+            if(String(message) == 'done'){
                 display_registration_success();
             }else{
                 display_registration_error(message);
@@ -66,7 +67,7 @@
                 success: function(res){
                     var response = JSON.parse(res);
                     display_new_registered_user(user,response.message);
-                    console.log(String(response.message) === 'user added');
+                    console.log(String(response.message) === 'done');
                     console.log(response.message);
 
                 },

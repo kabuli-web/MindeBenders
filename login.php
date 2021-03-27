@@ -41,9 +41,9 @@
     <div class="popup_close_div">
         <img class="close_button" id="popup_close_button" src="./assets/remove.png" alt="">
     </div> <div class="content">
-    <img class="register_popup_img" id="login_popup_img_success" style="display: none;" src="./assets/Feedback.png" alt="">
-    <img class="register_popup_img" id="login_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
-    <h2 class="registeration_popup_header" id="login_popup_header" >Logged in</h2>
+    <img class="popup_img" id="login_popup_img_success" style="display: none;" src="./assets/Feedback.png" alt="">
+    <img class="popup_img" id="login_popup_img_error" style="display: none;" src="./assets/security 3.png" alt="">
+    <h2 class="popup_header" id="login_popup_header" >Logged in</h2>
     </div>
 </div>
 <div class="profile-content">
@@ -85,7 +85,7 @@
    <style>
        #login_successful_pop_up{
            width: 500;
-           height: 500;
+           padding-bottom: 50;
            
            top: 25vh;
        }
@@ -114,7 +114,7 @@
         }
         function display_login_success(){
             $("#login_successful_pop_up").css('display','flex');
-            
+            $("#login_popup_header").first().text("User Logged In Successfully");
             $("#login_popup_img_success").css('display','flex');
             $("#login_popup_img_error").css('display','none');
            
@@ -146,7 +146,7 @@
                     }else{
                         display_login_error(response['message']);
                     }
-                    $(".pop_up").get(0).scrollIntoView();
+                    $("#login_successful_pop_up").get(0).scrollIntoView();
                     
                     
 
@@ -165,7 +165,7 @@
                     "password":$("input[name='password']").val(),
                     
                 }
-                console.log(user);
+                
                 login_user(user);
                 
         }
