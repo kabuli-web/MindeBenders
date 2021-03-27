@@ -30,7 +30,7 @@
             if( $user_result['status']=== false){
                 $res->message = $user_result['error'];
             }else{
-                $res->message = 'user added';
+                $res->message = 'done';
             }
         }
         $db->disconnect();
@@ -71,19 +71,19 @@
         $res = new response();
         if(isset($_SESSION['user'])){
             
-        $db = new db_connection();
-        $db->connect();
-        $dbConnection = $db->dbConnection;
-        $auth = new Authentication($dbConnection);
-        $user = json_decode($_POST['update_user'],true);
-        $user['student_id']=$_SESSION['user']['student_id'];
-        $result = $auth->update_user($user);
-        if($result['status']===false){
-            $res->message = $result['error'];
-        }elseif($result['status']===true){
-            $_SESSION['user']=$result['user'];
-            $res->message = 'done';
-        }
+            $db = new db_connection();
+            $db->connect();
+            $dbConnection = $db->dbConnection;
+            $auth = new Authentication($dbConnection);
+            $user = json_decode($_POST['update_user'],true);
+            $user['student_id']=$_SESSION['user']['student_id'];
+            $result = $auth->update_user($user);
+            if($result['status']===false){
+                $res->message = $result['error'];
+            }elseif($result['status']===true){
+                $_SESSION['user']= $result['user'];
+                $res->message = 'done';
+            }
         
         }else{
             $res->message = 'user not logged in';
@@ -98,7 +98,7 @@
         if($db->connection_status===true){
             $res->message = array(
                 "status"=> true,
-                'message' => "Database Connected Successfully. Enjoy"
+                'message' => "Database Connected Successfully. Enjoy errors = {$db->errors}" 
             );
         }else{
             $res->message = array(

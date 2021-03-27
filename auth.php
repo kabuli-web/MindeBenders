@@ -62,19 +62,27 @@ class Authentication{
     public function user_exists($id){
             $sql = "SELECT * FROM `_20457952_muhammad` WHERE student_id = {$id}";
             $result = $this->dbConnection->query($sql);
-            if(mysqli_num_rows($result)==0){
+            if(gettype($result)=="boolean"){
                 return array(
                     "status"=> false,
-                    'error'=> 'user doesnt exist',
-                    'user'=> null
+                    'error'=> 'internal server error',
+                    
                 );
             }else{
-                $user = $result->fetch_assoc();
-                return array(
-                    "status"=> true,
-                    'error'=> 'user already exist',
-                    'user'=> $user
-                );
+                if($result->num_rows==0){
+                    return array(
+                        "status"=> false,
+                        'error'=> 'user doesnt exist',
+                        'user'=> null
+                    );
+                }else{
+                    $user = $result->fetch_assoc();
+                    return array(
+                        "status"=> true,
+                        'error'=> 'user already exist',
+                        'user'=> $user
+                    );
+                }
             }
     }
     public function login_user($user){
@@ -114,12 +122,13 @@ class Authentication{
     }
     public function update_user($user)
     {   
-        $sql = "UPDATE `_20457952_muhammad` SET email = '{$user["email"]}', first_name = '{$user["first_name"]}',last_name = '{$user["last_name"]}',gpa={$user["gpa"]}, contact_number = {$user["contact_number"]}, day= '{$user["day"]}',activity= '{$user["activity"]}',time= '{$user["time"]}' WHERE student_id = 20457952";
             $user_exists = $this->user_exists($user['student_id']);
             if($user_exists['status']===true){
+                $sql = "UPDATE `_20457952_muhammad` SET email = '{$user["email"]}', first_name = '{$user["first_name"]}',last_name = '{$user["last_name"]}',gpa={$user["gpa"]}, contact_number = {$user["contact_number"]}, day= '{$user["day"]}',activity= '{$user["activity"]}',time= '{$user["time"]}' WHERE student_id = {$_SESSION['user']['student_id']}";
+
                 $update_result = $this->dbConnection->query($sql);
                 if($update_result===true){
-                    $user_e = $this->user_exists($user['student_id']);
+                    $user_e = $this->user_exists($_SESSION['user']['student_id']);
                     return array(
                         'status'=> true,
                         'user'=> $user_e['user']
