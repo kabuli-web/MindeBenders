@@ -61,7 +61,7 @@ class db_connection{
             die("ERROR: Could not connect. " . $this->dbConnection->connect_error);
         }else{
             $this-> connection_status = true;
-            $query = "SELECT id FROM _20457952_muhammad";
+            $query = "SELECT * FROM _20457952_muhammad";
             $result = $this->dbConnection->query( $query);
 
             if(gettype($result)=="boolean"){
@@ -181,6 +181,7 @@ class db_connection{
                         $this-> initial_records_exist = true;
                     }
                 }
+
             }
             
             

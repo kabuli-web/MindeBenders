@@ -57,7 +57,6 @@
                 success: function(res){
                 if(String(res).includes('Enjoy')){
                     console.log("dbconnected successfully")
-
                 }else{
                     $('#database-notice').css('display',"flex");
                     $('#database_error_log').text(res);
