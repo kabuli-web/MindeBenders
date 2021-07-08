@@ -10,7 +10,7 @@
              <div class="mobile-link"><a href="./edit_profile.php">My Profile</a><div class="line"></div></div>
              <?php }
              else{?>
-             <div class="mobile-link"><a href="./Login.php">Login</a><div class="line"></div></div>
+             <div class="mobile-link"><a href="./login.php">login</a><div class="line"></div></div>
             <?php }
             ?>
              <div class="mobile-link"><a href="./contact_us.php">Contact Us</a><div class="line"></div></div>
@@ -38,7 +38,7 @@
              <div class="link"><a href="./edit_profile.php">My Profile</a><div class="line"></div></div>
              <?php }
              else{?>
-             <div class="link"><a href="./Login.php">Login</a><div class="line"></div></div>
+             <div class="link"><a href="./login.php">Login</a><div class="line"></div></div>
             <?php }
             ?>
                 

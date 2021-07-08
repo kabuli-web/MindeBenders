@@ -51,10 +51,15 @@ class db_connection{
             }
     }
     public function connect(){
-        define('DB_SERVER', 'localhost');
-        define('DB_USERNAME', 'uni');
-        define('DB_PASSWORD', '');
-        define('DB_NAME', 'question3');
+        $dbName = getenv('dbName');
+        $dbHost = getenv('siteGroundDbHost');
+        $dbUsername = getenv('userName');
+        $dbPassword = getenv('userPassword');
+
+        define('DB_SERVER', $dbHost);
+        define('DB_USERNAME', $dbUsername);
+        define('DB_PASSWORD', $dbPassword);
+        define('DB_NAME', $dbName);
         $this->dbConnection = new mysqli(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
         if($this->dbConnection->connect_error){
             $this-> connection_status = false;
