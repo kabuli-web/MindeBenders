@@ -5,4 +5,4 @@ Javscript 🚀
 HTML 5️⃣
 myslq 💾 
 
-Use this link to check out the site [MindBender](mindbenders.herokuapp.com).
+Use this link to check out the site [MindBender](https://mindbenders.herokuapp.com).
